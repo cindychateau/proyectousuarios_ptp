@@ -5,6 +5,11 @@ import java.util.HashMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ControladorUsuarios {
@@ -32,6 +37,52 @@ public class ControladorUsuarios {
 		model.addAttribute("paises", paises);
 		
 		return "usuarios.jsp";
+	}
+	
+	/*Para formularios necesitamos 2 rutas: una que muestre el formulario 
+	 * y otra que reciba el formulario*/
+	@GetMapping("/formulario")
+	public String formulario() {
+		return "formulario.jsp";
+	}
+	
+	@PostMapping("/registrarme")
+	public String registrarme(@RequestParam(value="nombre") String nombreEnMetodo,
+							  @RequestParam(value="email") String emailEnMetodo,
+							  RedirectAttributes flash /*Permite enviar mensajes de validación*/,
+							  HttpSession session /*Permite guardar info en sesión*/) {
+		
+		
+		System.out.println("El nombre fue:"+nombreEnMetodo);
+		System.out.println("El email fue:"+emailEnMetodo);
+		
+		//Validación
+		if(nombreEnMetodo.equals("")) {
+			flash.addFlashAttribute("errorNombre", "Por favor proporciona tu nombre");
+			return "redirect:/formulario";
+		}
+		
+		//Guardamos en sesión
+		session.setAttribute("nombreUsuario", nombreEnMetodo); //(variable, valor)
+		
+		return "redirect:/bienvenida";
+		
+	}
+	
+	@GetMapping("/bienvenida")
+	public String bienvenida(HttpSession session) {
+		
+		//Creamos un objeto de sesión
+		Object nombreEnSesion = session.getAttribute("nombreUsuario");
+		if(nombreEnSesion != null) {
+			String nombre = (String)nombreEnSesion;
+			System.out.println("El nombre guardado es:"+nombre);
+		} else {
+			System.out.println("No se ha registrado");
+		}
+		
+		
+		return "bienvenida.jsp";
 	}
 	
 }
