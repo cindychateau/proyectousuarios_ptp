@@ -17,7 +17,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="usuarios")
-public class Usuarios {
+public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY) //AI
@@ -47,11 +47,11 @@ public class Usuarios {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date updatedAt;
 	
-	public Usuarios() {
+	public Usuario() {
 	}
 	
 	//Crear un nuevo usuario
-	public Usuarios(String nombre, String apellido, String email, String password) {
+	public Usuario(String nombre, String apellido, String email, String password) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
@@ -59,7 +59,7 @@ public class Usuarios {
 	}
 	
 	//Actualizar un usuario
-	public Usuarios(long id, String nombre, String apellido, String email, String password) {
+	public Usuario(long id, String nombre, String apellido, String email, String password) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
