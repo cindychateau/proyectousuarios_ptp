@@ -21,7 +21,7 @@ public class Servicios {
 	}
 	
 	//Guardamos un usuarios
-	public Usuario guardaUsuario(Usuario nuevoUsuario) {
+	public Usuario guardarUsuario(Usuario nuevoUsuario) {
 		return repoUsuarios.save(nuevoUsuario);
 	}
 	
