@@ -32,12 +32,18 @@
 					usuario = obj(juana) 
 				 -->
 				<c:forEach items="${usuarios}" var="usuario">
-					<tr>
+					<tr><!-- table row -->
 						<td>${usuario.nombre}</td>
 						<td>${usuario.apellido}</td>
 						<td>${usuario.email}</td>
 						<td>
 							<a href="/mostrar/${usuario.id}" class="btn btn-info">Mostrar</a>
+							
+							<form action="/borrar/${usuario.id}" method="post">
+								<input type="hidden" name="_method" value="DELETE" >
+								<input type="submit" value="Borrar" class="btn btn-danger">
+							</form>
+							
 						</td>
 					</tr>
 				</c:forEach>
