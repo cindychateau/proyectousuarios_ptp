@@ -26,7 +26,7 @@
 			</div>
 			<div>
 				<form:label path="email" >E-mail:</form:label>
-				<form:input path="email" class="form-control" />
+				<form:input type="email" path="email" class="form-control" />
 				<form:errors path="email" class="text-danger" />
 			</div>
 			<div>

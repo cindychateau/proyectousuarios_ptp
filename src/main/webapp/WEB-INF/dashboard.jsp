@@ -36,7 +36,9 @@
 						<td>${usuario.nombre}</td>
 						<td>${usuario.apellido}</td>
 						<td>${usuario.email}</td>
-						<td></td>
+						<td>
+							<a href="/mostrar/${usuario.id}" class="btn btn-info">Mostrar</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
