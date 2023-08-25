@@ -40,7 +40,7 @@ public class Usuario {
 	@Size(min=6, max=255) //En un futuro vamos a encriptarla
 	private String password;
 	
-	@Column(updatable=false)
+	@Column(updatable=false) //Este atributo solamente se ingresa una vez, y NUNCA se actualiza
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date createdAt;
 	

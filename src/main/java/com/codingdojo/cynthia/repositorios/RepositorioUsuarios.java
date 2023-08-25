@@ -17,6 +17,8 @@ public interface RepositorioUsuarios extends CrudRepository<Usuario, Long> {
 	//UPDATE usuarios SET nombre = Valor de objeto
 	Usuario save(Usuario nuevoUsuario); //Recibimos objeto usuario
 	
+	//Existen en CrudRepo: findAll(), findById(id), save(Object ob), deleteById(id)
+	
 	//Queries dinámicos
 	//SELECT * FROM usuarios WHERE email = <email que recibimos en el método>
 	List<Usuario> findByEmail(String email);
