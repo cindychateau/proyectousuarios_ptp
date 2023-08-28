@@ -44,6 +44,8 @@
 								<input type="submit" value="Borrar" class="btn btn-danger">
 							</form>
 							
+							<a href="/editar/${usuario.id}" class="btn btn-primary">Editar</a>
+							
 						</td>
 					</tr>
 				</c:forEach>
