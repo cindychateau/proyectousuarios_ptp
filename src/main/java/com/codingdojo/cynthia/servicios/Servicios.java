@@ -38,4 +38,14 @@ public class Servicios {
 		repoUsuarios.deleteById(id); //DELETE FROM usuarios WHERE id = <id>
 	}
 	
+	//Recibir una palabra
+	//palabra = "na"
+	public List<Usuario> buscarPorNombre(String palabra) {
+		return repoUsuarios.findByNombreContaining(palabra);
+	}
+	
+	public List<Usuario> top10() {
+		return repoUsuarios.findTop10ByOrderByNombreAsc();
+	}
+	
 }

@@ -29,4 +29,10 @@ public interface RepositorioUsuarios extends CrudRepository<Usuario, Long> {
 	//SELECT * FROM usuarios WHERE nombre LIKE "<letras>%"
 	List<Usuario> findByNombreStartingWith(String letras);
 	
+	//SELECT * FROM usuarios WHERE nombre LIKE "%<palabra>%"
+	List<Usuario> findByNombreContaining(String palabra);
+	
+	//SELECT * FROM usuarios ORDER BY nombre ASC -> ORDER BY rating DESC
+	List<Usuario> findTop10ByOrderByNombreAsc();
+	
 }

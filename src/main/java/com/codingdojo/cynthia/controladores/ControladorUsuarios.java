@@ -174,5 +174,35 @@ public class ControladorUsuarios {
 		
 	}
 	
+	// /buscar/na
+	// String palabra = "na";
+	@GetMapping("/buscar/{palabra}")
+	public String buscar(@PathVariable("palabra") String palabra,
+						 Model model) {
+		//Obtenemos la lista de usuarios con esa palabra
+		List <Usuario> usuariosConPalabra = servicio.buscarPorNombre(palabra);
+		
+		//Enviamos la lista a buscar.jsp
+		model.addAttribute("usuarios", usuariosConPalabra);
+		
+		//Enviamos la palabra al jsp
+		model.addAttribute("palabra", palabra);
+		
+		return "buscar.jsp";
+		
+	}
+	
+	@PostMapping("/busqueda")
+	public String busqueda(@RequestParam("palabra") String palabra) {
+		return "redirect:/buscar/"+palabra;
+	}
+	
+	@GetMapping("/top10")
+	public String top(Model model) {
+		List<Usuario> usuariosTop = servicio.top10();
+		model.addAttribute("usuarios", usuariosTop);
+		return "top10.jsp";
+	}
+	
 	
 }

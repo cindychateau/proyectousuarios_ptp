@@ -15,6 +15,14 @@
 			<h1>¡Bienvenid@ a tu Dashboard!</h1>
 			<a href="/nuevo" class="btn btn-success">Nuevo Usuario</a>
 		</header>
+		
+		<form action="/busqueda" method="POST" class="row">
+			<div class="col-10">
+				<input type="text" name="palabra" class="form-control" placeholder="Ingresa el nombre a buscar">
+			</div>
+			<input type="submit" value="Buscar" class="btn btn-primary col-2">
+		</form>
+		
 		<table class="table table-hover">
 		<!--  -->
 			<thead>
