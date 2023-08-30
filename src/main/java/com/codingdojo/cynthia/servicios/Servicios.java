@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codingdojo.cynthia.modelos.Direccion;
 import com.codingdojo.cynthia.modelos.Usuario;
+import com.codingdojo.cynthia.repositorios.RepositorioDirecciones;
 import com.codingdojo.cynthia.repositorios.RepositorioUsuarios;
 
 @Service
@@ -13,6 +15,9 @@ public class Servicios {
 	
 	@Autowired //No es una instancia
 	private RepositorioUsuarios repoUsuarios;
+	
+	@Autowired
+	private RepositorioDirecciones repoDir;
 	
 	
 	//Me regrese una lista con todos los usuarios
@@ -46,6 +51,14 @@ public class Servicios {
 	
 	public List<Usuario> top10() {
 		return repoUsuarios.findTop10ByOrderByNombreAsc();
+	}
+	
+	public Direccion guardarDireccion(Direccion nuevaDireccion) { //Regresa un obj direccion
+		return repoDir.save(nuevaDireccion);
+	}
+	
+	public List<Usuario> usuariosSinDireccion(){
+		return repoUsuarios.findByDireccionIdIsNull();
 	}
 	
 }

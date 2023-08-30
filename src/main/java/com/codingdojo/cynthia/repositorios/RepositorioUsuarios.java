@@ -35,4 +35,7 @@ public interface RepositorioUsuarios extends CrudRepository<Usuario, Long> {
 	//SELECT * FROM usuarios ORDER BY nombre ASC -> ORDER BY rating DESC
 	List<Usuario> findTop10ByOrderByNombreAsc();
 	
+	//Regrese los usuarios que NO tienen dirección
+	List<Usuario> findByDireccionIdIsNull();
+	
 }

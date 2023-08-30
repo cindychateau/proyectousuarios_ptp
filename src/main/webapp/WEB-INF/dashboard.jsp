@@ -30,6 +30,7 @@
 					<th>Nombre</th>
 					<th>Apellido</th>
 					<th>Email</th>
+					<th>Dirección</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
@@ -44,6 +45,7 @@
 						<td>${usuario.nombre}</td>
 						<td>${usuario.apellido}</td>
 						<td>${usuario.email}</td>
+						<td>${usuario.direccion.calle} ${usuario.direccion.numero}</td>
 						<td>
 							<a href="/mostrar/${usuario.id}" class="btn btn-info">Mostrar</a>
 							
