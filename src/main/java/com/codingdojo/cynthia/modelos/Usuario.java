@@ -11,6 +11,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -52,6 +54,10 @@ public class Usuario {
 	
 	@OneToOne(mappedBy="usuario", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private Direccion direccion;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="salon_id") //Llave Foránea
+	private Salon salon;
 	
 	public Usuario() {
 	}
@@ -135,6 +141,14 @@ public class Usuario {
 
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
+	}
+
+	public Salon getSalon() {
+		return salon;
+	}
+
+	public void setSalon(Salon salon) {
+		this.salon = salon;
 	}
 
 	@PrePersist //Antes de hacer la creación

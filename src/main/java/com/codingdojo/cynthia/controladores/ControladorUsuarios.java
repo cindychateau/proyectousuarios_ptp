@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.codingdojo.cynthia.modelos.Salon;
 import com.codingdojo.cynthia.modelos.Usuario;
 import com.codingdojo.cynthia.servicios.Servicios;
 
@@ -111,15 +112,23 @@ public class ControladorUsuarios {
 	}
 	
 	@GetMapping("/nuevo")
-	public String nuevo(@ModelAttribute("usuario") Usuario usuario) {
+	public String nuevo(@ModelAttribute("usuario") Usuario usuario,
+						Model model) {
+		List<Salon> salones = servicio.todosSalones();
+		model.addAttribute("salones", salones);
+		
 		return "nuevo.jsp";
 	}
 	
 	@PostMapping("/crear") //@Valid me permite validar la infor del objeto
 	public String crear( @Valid @ModelAttribute("usuario") Usuario usuario,
-						 BindingResult result /*Encargado de enviar los mensajes de validación*/ ) {
+						 BindingResult result /*Encargado de enviar los mensajes de validación*/,
+						 Model model) {
 		
 		if(result.hasErrors()) {
+			List<Salon> salones = servicio.todosSalones();
+			model.addAttribute("salones", salones);
+			
 			return "nuevo.jsp";
 		} else {
 			servicio.guardarUsuario(usuario);
@@ -156,22 +165,26 @@ public class ControladorUsuarios {
 		Usuario usuarioBuscado = servicio.buscarUsuario(id);
 		model.addAttribute("usuario", usuarioBuscado);
 		
-		return "editar.jsp";
+		List<Salon> salones = servicio.todosSalones();
+		model.addAttribute("salones", salones);
 		
+		return "editar.jsp";
 	}
 	
 	@PutMapping("/actualizar/{id}") //IMPORTANTE: debe llamarse ID
 	public String actualizar(@Valid @ModelAttribute("usuario") Usuario usuario,
-							 BindingResult result) {
+							 BindingResult result,
+							 Model model) {
 		
 		if(result.hasErrors()) {
+			List<Salon> salones = servicio.todosSalones();
+			model.addAttribute("salones", salones);
 			return "editar.jsp";
 		} else {
 			//Guardar otra vez el usuario
 			servicio.guardarUsuario(usuario);
 			return "redirect:/dashboard";
 		}
-		
 	}
 	
 	// /buscar/na

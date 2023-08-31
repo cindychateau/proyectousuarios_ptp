@@ -31,6 +31,7 @@
 					<th>Apellido</th>
 					<th>Email</th>
 					<th>Dirección</th>
+					<th>Salón</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
@@ -46,6 +47,7 @@
 						<td>${usuario.apellido}</td>
 						<td>${usuario.email}</td>
 						<td>${usuario.direccion.calle} ${usuario.direccion.numero}</td>
+						<td>${usuario.salon.nombre}</td>
 						<td>
 							<a href="/mostrar/${usuario.id}" class="btn btn-info">Mostrar</a>
 							

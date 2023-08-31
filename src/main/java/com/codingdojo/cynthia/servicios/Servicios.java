@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codingdojo.cynthia.modelos.Direccion;
+import com.codingdojo.cynthia.modelos.Salon;
 import com.codingdojo.cynthia.modelos.Usuario;
 import com.codingdojo.cynthia.repositorios.RepositorioDirecciones;
+import com.codingdojo.cynthia.repositorios.RepositorioSalones;
 import com.codingdojo.cynthia.repositorios.RepositorioUsuarios;
 
 @Service
@@ -18,6 +20,9 @@ public class Servicios {
 	
 	@Autowired
 	private RepositorioDirecciones repoDir;
+	
+	@Autowired
+	private RepositorioSalones repoSalones;
 	
 	
 	//Me regrese una lista con todos los usuarios
@@ -59,6 +64,10 @@ public class Servicios {
 	
 	public List<Usuario> usuariosSinDireccion(){
 		return repoUsuarios.findByDireccionIdIsNull();
+	}
+	
+	public List<Salon> todosSalones() {
+		return repoSalones.findAll();
 	}
 	
 }
