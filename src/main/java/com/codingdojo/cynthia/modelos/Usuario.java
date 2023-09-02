@@ -1,6 +1,7 @@
 package com.codingdojo.cynthia.modelos;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,6 +13,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
@@ -58,6 +61,14 @@ public class Usuario {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="salon_id") //Llave Foránea
 	private Salon salon;
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(
+			name="usuarios_tienen_hobbies",
+			joinColumns = @JoinColumn(name="usuario_id"),
+			inverseJoinColumns = @JoinColumn(name="hobby_id")
+			)
+	private List<Hobby> hobbies;
 	
 	public Usuario() {
 	}
@@ -149,6 +160,14 @@ public class Usuario {
 
 	public void setSalon(Salon salon) {
 		this.salon = salon;
+	}
+
+	public List<Hobby> getHobbies() {
+		return hobbies;
+	}
+
+	public void setHobbies(List<Hobby> hobbies) {
+		this.hobbies = hobbies;
 	}
 
 	@PrePersist //Antes de hacer la creación
