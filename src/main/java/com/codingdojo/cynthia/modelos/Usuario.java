@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -55,13 +59,17 @@ public class Usuario {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date updatedAt;
 	
+	@JsonManagedReference(value="direcciones-json") //Objeto Usuario SI va a mostrar direccion
 	@OneToOne(mappedBy="usuario", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private Direccion direccion;
 	
+	@JsonBackReference(value="salones-json")
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="salon_id") //Llave Foránea
 	private Salon salon;
 	
+	@JsonManagedReference(value="hobbies-json")
+	@JsonIgnore //Para NO mandarlo a través de JSON al ser guardado
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(
 			name="usuarios_tienen_hobbies",
